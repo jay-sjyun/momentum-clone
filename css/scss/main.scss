@@ -1,0 +1,85 @@
+.hidden {
+  display: none;
+}
+
+body,
+button,
+input,
+::placeholder {
+  color: #fff;
+  font-size: 100%;
+}
+
+body {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+// 미디어쿼리 설정 필요
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+header,
+footer,
+.main {
+  padding: 10px 15px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.clock {
+  margin-bottom: 20px;
+  font-size: 3.5rem;
+}
+
+.login-form {
+  margin-bottom: 20px;
+
+  .question {
+    display: block;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .username {
+    display: block;
+    max-width: 90%;
+    margin: 10px auto 0;
+    border-bottom: 3px solid #fff;
+    font-size: 1.5rem;
+  }
+
+  .btn--signin {
+    display: block;
+    margin: 0 auto;
+    font-size: 1.5rem;
+  }
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+
+  .quote {
+    align-self: center;
+    margin-bottom: 20px;
+  }
+
+  .btn--todo {
+    align-self: flex-end;
+  }
+}

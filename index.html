@@ -1,31 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Momentum App</title>
-</head>
-<body>
-    <form id="login-form" class="hidden">
-        <input type="text" placeholder="What is your name?" maxlength="15" required>
-        <button>Log In</button>
-    </form>
-    <h2 id="clock">00:00:00</h2>
-    <h1 id="greeting" class="hidden"></h1>
-    <form id="todo-form" action="">
-        <input type="text" placeholder="Write a To Do and Press Enter" required>
-    </form>
-    <ul id="todo-list"></ul>
-    <div id="quote">
-        <span></span><br>
-        <span></span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <title>Momentum Clone</title>
+    <script defer src="js/greetings.js"></script>
+    <script defer src="js/clock.js"></script>
+    <script defer src="js/quotes.js"></script>
+    <script defer src="js/background.js"></script>
+    <script defer src="js/todo.js"></script>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="bookmarks">
+          <button>Links</button>
+        </div>
+        <div class="weather"></div>
+        <!-- 추후 d-day 추가 -->
+      </header>
+      <div class="main">
+        <div id="clock" class="clock">00:00:00</div>
+        <form id="login-form" class="login-form hidden">
+          <label class="question">
+            What is your name?
+            <input class="username" type="text" maxlength="15" required autofocus />
+          </label>
+          <button class="btn--signin">Sign In</button>
+        </form>
+        <h1 id="greeting" class="hidden"></h1>
+        <!-- 로그아웃 버튼 필요 -->
+        <form id="todo-form" action="">
+          <input type="text" placeholder="Write a To Do and Press Enter" required />
+        </form>
+        <ul id="todo-list"></ul>
+      </div>
+      <footer>
+        <div id="quote" class="quote">
+          <span></span><br />
+          <span></span>
+        </div>
+        <button class="btn--todo">Todo</button>
+      </footer>
     </div>
-    <script src="js/greetings.js"></script>
-    <script src="js/clock.js"></script>
-    <script src="js/quotes.js"></script>
-    <script src="js/background.js"></script>
-    <script src="js/todo.js"></script>
-</body>
+  </body>
 </html>

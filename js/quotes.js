@@ -11,8 +11,8 @@ const quotes = [
   { quote: "quote10", author: "author10" },
 ];
 
-const quote = document.querySelector("#quote span:first-child");
-const author = document.querySelector("#quote span:last-child");
+const quote = document.querySelector(".js-quote span:first-child");
+const author = document.querySelector(".js-quote span:last-child");
 
 const todaysQuote = quotes[Math.floor(Math.random() * quotes.length)];
 

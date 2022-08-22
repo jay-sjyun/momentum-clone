@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/main.css" />
     <title>Momentum Clone</title>
-    <script defer src="js/greetings.js"></script>
+    <script defer src="js/main.js"></script>
+    <!-- <script defer src="js/greetings.js"></script> -->
     <script defer src="js/clock.js"></script>
     <script defer src="js/quotes.js"></script>
     <script defer src="js/background.js"></script>
@@ -17,33 +18,36 @@
     <div class="wrap">
       <header>
         <div class="bookmarks">
-          <button>Links</button>
+          <button class="btn--links">Links</button>
         </div>
         <div class="weather"></div>
         <!-- 추후 d-day 추가 -->
       </header>
       <div class="main">
-        <div id="clock" class="clock">00:00:00</div>
-        <form id="login-form" class="login-form hidden">
+        <div class="clock js-clock">00:00:00</div>
+        <form class="signin-form hidden js-signin-form">
           <label class="question">
             What is your name?
-            <input class="username" type="text" maxlength="15" required autofocus />
+            <input class="username js-username" type="text" maxlength="15" required autofocus />
           </label>
-          <button class="btn--signin">Sign In</button>
+          <button class="btn--signinout">Sign In</button>
         </form>
-        <h1 id="greeting" class="hidden"></h1>
+        <h1 class="greeting hidden js-greeting"></h1>
+        <div class="signoutwrap js-signout hidden">
+          <button class="btn--signinout hidden js-btn-signout">Sign Out</button>
+        </div>
         <!-- 로그아웃 버튼 필요 -->
-        <form id="todo-form" action="">
-          <input type="text" placeholder="Write a To Do and Press Enter" required />
+        <form class="todo-form">
+          <input type="text" placeholder="Write a To Do and Press Enter" required class="new-todo" />
         </form>
-        <ul id="todo-list"></ul>
+        <ul class="todo-list"></ul>
       </div>
       <footer>
-        <div id="quote" class="quote">
+        <div class="quote js-quote">
           <span></span><br />
           <span></span>
         </div>
-        <button class="btn--todo">Todo</button>
+        <button class="btn--apps">Apps</button>
       </footer>
     </div>
   </body>

@@ -90,11 +90,12 @@ footer,
 }
 
 .signoutwrap .btn--signinout {
-  margin: 0 auto 50px;
+  margin: 0 auto 40px;
 }
 
 .todo-form {
   width: 100%;
+  margin-bottom: 15px;
 }
 .todo-form .new-todo {
   display: block;
@@ -105,6 +106,13 @@ footer,
   padding-bottom: 5px;
   font-size: 1.6rem;
   text-align: center;
+}
+
+.todo-list {
+  font-size: 1.6rem;
+}
+.todo-list li {
+  margin: 7px auto;
 }
 
 footer {

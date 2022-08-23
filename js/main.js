@@ -1,6 +1,7 @@
 "use strict";
 
 signInAndOut();
+toDoApp();
 
 function signInAndOut() {
   const signInForm = document.querySelector(".js-signin-form");
@@ -24,7 +25,7 @@ function signInAndOut() {
   }
 
   function paintGreeting(username) {
-    greeting.innerText = `Hello ${username}`;
+    greeting.innerText = `Hello, ${username}`;
     greeting.classList.remove(HIDDEN_CLASSNAME);
   }
 
@@ -46,5 +47,58 @@ function signInAndOut() {
   } else {
     paintGreeting(savedUsername);
     showSignOutBtn();
+  }
+}
+
+function toDoApp() {
+  const toDoForm = document.querySelector(".js-todo-form");
+  const newToDoInput = document.querySelector(".js-new-todo");
+  const toDoList = document.querySelector(".js-todo-list");
+
+  const TODOS_KEY = "toDos";
+
+  let toDos = [];
+
+  function saveToDo() {
+    localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
+  }
+
+  function deleteToDo(e) {
+    const li = e.target.parentElement;
+    li.remove();
+  }
+
+  function paintToDo(newToDoObject) {
+    const li = document.createElement("li");
+    li.id = newToDoObject.id;
+    const toDoText = document.createElement("span");
+    toDoText.innerText = newToDoObject.text;
+    const deleteBtn = document.createElement("button");
+    deleteBtn.innerText = "🗑️";
+    deleteBtn.addEventListener("click", deleteToDo);
+    li.appendChild(toDoText);
+    li.appendChild(deleteBtn);
+    toDoList.appendChild(li);
+  }
+
+  function handleToDoSubmit(e) {
+    e.preventDefault();
+    const newToDoObject = {
+      text: newToDoInput.value,
+      id: Date.now(),
+    };
+    newToDoInput.value = "";
+    paintToDo(newToDoObject);
+    toDos.push(newToDoObject);
+    saveToDo();
+  }
+
+  toDoForm.addEventListener("submit", handleToDoSubmit);
+
+  const savedToDos = localStorage.getItem(TODOS_KEY);
+
+  if (savedToDos !== null) {
+    toDos = JSON.parse(savedToDos);
+    toDos.forEach(paintToDo);
   }
 }

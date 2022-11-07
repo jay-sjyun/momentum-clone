@@ -1,0 +1,20 @@
+{
+  "name": "momentum-clone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx json-server -w db.json --port 8080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dev-yun0525/momentum-clone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dev-yun0525/momentum-clone/issues"
+  },
+  "homepage": "https://github.com/dev-yun0525/momentum-clone#readme"
+}

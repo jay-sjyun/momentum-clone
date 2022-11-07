@@ -1,104 +1,153 @@
 "use strict";
 
-signInAndOut();
-toDoApp();
+const URL = "http://localhost:8080/todos";
+const USERNAME_KEY = "username";
+
+let currentUsername = localStorage.getItem(USERNAME_KEY);
+
+const httpRequest = {
+  get(url) {
+    return fetch(url);
+  },
+  post(url, payload) {
+    return fetch(url, {
+      method: "POST",
+      headers: { "content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+  },
+  put(url, payload) {
+    return fetch(url, {
+      method: "PUT",
+      headers: { "content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+  },
+  patch(url, payload) {
+    return fetch(url, {
+      method: "PATCH",
+      headers: { "content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+  },
+  delete(url) {
+    return fetch(url, { method: "DELETE" });
+  },
+};
 
 function signInAndOut() {
-  const signInForm = document.querySelector(".js-signin-form");
-  const signInInput = signInForm.querySelector(".js-username");
-  const greeting = document.querySelector(".js-greeting");
-  const signOutArea = document.querySelector(".js-signout");
-  const signOutBtn = signOutArea.querySelector(".js-btn-signout");
+  const $signArea = document.querySelector(".js-sign-wrap");
+  const $signForm = $signArea.querySelector(".js-sign-form");
+  const $signInQuestion = $signArea.querySelector(".js-question");
+  const $usernameInput = $signArea.querySelector(".js-username");
+  const $signInBtn = $signArea.querySelector(".js-btn-signin");
+  const $greetingTxt = $signArea.querySelector(".js-greeting");
+  const $signOutBtn = $signArea.querySelector(".js-btn-signout");
+  const $toDo = document.querySelector(".js-todo-wrap");
 
   const HIDDEN_CLASSNAME = "hidden";
-  const USERNAME_KEY = "username";
 
-  const savedUsername = localStorage.getItem(USERNAME_KEY);
+  function toggleSignInUI() {
+    $signInQuestion.classList.toggle(HIDDEN_CLASSNAME);
+    $signInBtn.classList.toggle(HIDDEN_CLASSNAME);
+  }
 
-  function onSignIn(e) {
-    e.preventDefault();
-    signInForm.classList.add(HIDDEN_CLASSNAME);
-    const typedUsername = signInInput.value;
-    localStorage.setItem(USERNAME_KEY, typedUsername);
-    paintGreeting(typedUsername);
-    showSignOutBtn();
+  function toggleToDo() {
+    $toDo.classList.toggle(HIDDEN_CLASSNAME);
   }
 
   function paintGreeting(username) {
-    greeting.innerText = `Hello, ${username}`;
-    greeting.classList.remove(HIDDEN_CLASSNAME);
+    $greetingTxt.textContent = `Hi, ${username}`;
+    $greetingTxt.classList.toggle(HIDDEN_CLASSNAME);
+    $signOutBtn.classList.toggle(HIDDEN_CLASSNAME);
   }
 
-  function onSignOut() {
-    greeting.classList.add(HIDDEN_CLASSNAME);
-    signOutArea.classList.add(HIDDEN_CLASSNAME);
+  function handleSignOut() {
     localStorage.removeItem(USERNAME_KEY);
     location.reload();
   }
 
-  function showSignOutBtn() {
-    signOutArea.classList.remove(HIDDEN_CLASSNAME);
-    signOutBtn.addEventListener("click", onSignOut);
+  function handleSignIn(e) {
+    e.preventDefault();
+    const username = $usernameInput.value;
+
+    httpRequest.post(URL, { id: username }).catch((e) => console.error(e));
+
+    currentUsername = username;
+    localStorage.setItem(USERNAME_KEY, username);
+    toggleSignInUI();
+    $signOutBtn.addEventListener("click", handleSignOut);
+    paintGreeting(username);
+    toggleToDo();
+    toDoApp();
   }
 
-  if (savedUsername === null) {
-    signInForm.classList.remove(HIDDEN_CLASSNAME);
-    signInForm.addEventListener("submit", onSignIn);
-  } else {
-    paintGreeting(savedUsername);
-    showSignOutBtn();
+  $signForm.addEventListener("submit", handleSignIn);
+
+  if (currentUsername !== null) {
+    toggleSignInUI();
+    $signOutBtn.addEventListener("click", handleSignOut);
+    paintGreeting(currentUsername);
+    toggleToDo();
+    toDoApp();
   }
 }
 
 function toDoApp() {
-  const toDoForm = document.querySelector(".js-todo-form");
-  const newToDoInput = document.querySelector(".js-new-todo");
-  const toDoList = document.querySelector(".js-todo-list");
+  const $toDo = document.querySelector(".js-todo-wrap");
+  const $toDoForm = $toDo.querySelector(".js-todo-form");
+  const $newToDoInput = $toDoForm.querySelector(".js-new-todo");
+  const $toDoList = $toDo.querySelector(".js-todo-list");
 
-  const TODOS_KEY = "toDos";
-
-  let toDos = [];
+  let todos = [];
 
   function saveToDo() {
-    localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
+    httpRequest.put(`${URL}/${currentUsername}`, { list: todos }).catch((e) => console.error(e));
   }
 
   function deleteToDo(e) {
-    const li = e.target.parentElement;
-    li.remove();
-  }
-
-  function paintToDo(newToDoObject) {
-    const li = document.createElement("li");
-    li.id = newToDoObject.id;
-    const toDoText = document.createElement("span");
-    toDoText.innerText = newToDoObject.text;
-    const deleteBtn = document.createElement("button");
-    deleteBtn.innerText = "🗑️";
-    deleteBtn.addEventListener("click", deleteToDo);
-    li.appendChild(toDoText);
-    li.appendChild(deleteBtn);
-    toDoList.appendChild(li);
-  }
-
-  function handleToDoSubmit(e) {
-    e.preventDefault();
-    const newToDoObject = {
-      text: newToDoInput.value,
-      id: Date.now(),
-    };
-    newToDoInput.value = "";
-    paintToDo(newToDoObject);
-    toDos.push(newToDoObject);
+    todos = todos.filter((toDoObj) => +toDoObj.id !== +e.target.parentNode.id);
+    $toDoList.removeChild(e.target.parentNode);
     saveToDo();
   }
 
-  toDoForm.addEventListener("submit", handleToDoSubmit);
-
-  const savedToDos = localStorage.getItem(TODOS_KEY);
-
-  if (savedToDos !== null) {
-    toDos = JSON.parse(savedToDos);
-    toDos.forEach(paintToDo);
+  function paintToDo(toDoObj) {
+    const $li = document.createElement("li");
+    $li.id = toDoObj.id;
+    //텍스트 추가
+    const $span = document.createElement("span");
+    $span.textContent = toDoObj.content;
+    $newToDoInput.value = "";
+    $li.appendChild($span);
+    //삭제 버튼 추가
+    const delBtn = document.createElement("button");
+    delBtn.textContent = "DELETE";
+    $li.appendChild(delBtn);
+    delBtn.addEventListener("click", deleteToDo);
+    $toDoList.appendChild($li);
   }
+
+  function addToDo(e) {
+    e.preventDefault();
+    const toDoObj = {};
+    toDoObj.id = Date.now();
+    toDoObj.content = $newToDoInput.value;
+    paintToDo(toDoObj);
+    todos.push(toDoObj);
+    saveToDo();
+  }
+
+  $toDoForm.addEventListener("submit", addToDo);
+
+  httpRequest
+    .get(`${URL}/${currentUsername}`)
+    .then((response) => response.json())
+    .then((data) => {
+      data.list.forEach((todo) => {
+        paintToDo(todo);
+        todos.push(todo);
+      });
+      saveToDo();
+    })
+    .catch((e) => console.error(e));
 }

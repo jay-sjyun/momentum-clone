@@ -8,11 +8,14 @@
     <link rel="stylesheet" href="css/main.css" />
     <title>Momentum Clone</title>
     <script defer src="js/main.js"></script>
-    <!-- <script defer src="js/greetings.js"></script> -->
     <script defer src="js/clock.js"></script>
     <script defer src="js/quotes.js"></script>
     <script defer src="js/background.js"></script>
-    <script defer src="js/todo.js"></script>
+    <script>
+      window.addEventListener("load", () => {
+        signInAndOut();
+      });
+    </script>
   </head>
   <body>
     <div class="wrap">
@@ -23,24 +26,26 @@
         <div class="weather"></div>
         <!-- 추후 d-day 추가 -->
       </header>
+      <h1 class="app-title">Momentum</h1>
       <div class="main">
         <div class="clock js-clock">00:00:00</div>
-        <form class="signin-form hidden js-signin-form">
-          <label class="question">
-            What is your name?
-            <input class="username js-username" type="text" maxlength="15" required autofocus />
-          </label>
-          <button class="btn--signinout">Sign In</button>
-        </form>
-        <h1 class="greeting hidden js-greeting"></h1>
-        <div class="signoutwrap js-signout hidden">
-          <button class="btn--signinout hidden js-btn-signout">Sign Out</button>
+        <div class="sign-wrap js-sign-wrap">
+          <form class="sign__form js-sign-form">
+            <label class="question js-question">
+              What is your name?
+              <input class="username js-username" type="text" maxlength="25" required autofocus />
+            </label>
+            <button class="js-btn-signin">Sign In</button>
+          </form>
+          <p class="greeting hidden js-greeting"></p>
+          <button class="hidden js-btn-signout">Sign Out</button>
         </div>
-        <!-- 로그아웃 버튼 필요 -->
-        <form class="todo-form js-todo-form">
-          <input type="text" placeholder="Write a To Do and Press Enter" required class="new-todo js-new-todo" />
-        </form>
-        <ul class="todo-list js-todo-list"></ul>
+        <div class="todo-wrap js-todo-wrap hidden">
+          <form class="todo-form js-todo-form">
+            <input type="text" placeholder="Write a To Do and Press Enter" required class="new-todo js-new-todo" />
+          </form>
+          <ul class="todo-list js-todo-list"></ul>
+        </div>
       </div>
       <footer>
         <div class="quote js-quote">

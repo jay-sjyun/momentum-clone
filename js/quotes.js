@@ -1,20 +1,20 @@
 const quotes = [
-  { quote: "quote1", author: "author1" },
-  { quote: "quote2", author: "author2" },
-  { quote: "quote3", author: "author3" },
-  { quote: "quote4", author: "author4" },
-  { quote: "quote5", author: "author5" },
-  { quote: "quote6", author: "author6" },
-  { quote: "quote7", author: "author7" },
-  { quote: "quote8", author: "author8" },
-  { quote: "quote9", author: "author9" },
-  { quote: "quote10", author: "author10" },
+  { quote: "Be yourself; everyone else is already taken.", author: "Oscar Wilde" },
+  { quote: "You only live once, but if you do it right, once is enough.", author: "Mae West" },
+  { quote: "Be the change that you wish to see in the world.", author: "Mahatma Gandhi" },
+  { quote: "In three words I can sum up everything I've learned about life: it goes on.", author: "Robert Frost" },
+  { quote: "If you tell the truth, you don't have to remember anything.", author: "Mark Twain" },
+  { quote: "I have not failed. I've just found 10,000 ways that won't work.", author: "Thomas A. Edison" },
+  { quote: "It is never too late to be what you might have been.", author: "George Eliot" },
+  { quote: "Life isn't about finding yourself. Life is about creating yourself.", author: "George Bernard Shaw" },
+  { quote: "Life is like riding a bicycle. To keep your balance, you must keep moving.", author: "Albert Einstein" },
+  { quote: "It takes courage to grow up and become who you really are.", author: "E.E. Cummings" },
 ];
 
-const quote = document.querySelector(".js-quote span:first-child");
-const author = document.querySelector(".js-quote span:last-child");
+const $quote = document.querySelector(".js-quote q:first-child");
+const $author = document.querySelector(".js-quote span:last-child");
 
 const todaysQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
-quote.innerText = todaysQuote.quote;
-author.innerText = todaysQuote.author;
+$quote.textContent = `"${todaysQuote.quote}"`;
+$author.textContent = todaysQuote.author;

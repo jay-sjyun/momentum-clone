@@ -45,8 +45,7 @@ footer,
 }
 
 .app-title {
-  margin-top: 20px;
-  font-size: 4rem;
+  font-size: 2.4rem;
   font-weight: 700;
   text-align: center;
 }
@@ -165,8 +164,15 @@ footer {
   .quote {
     align-self: center;
     margin-bottom: 20px;
-    font-size: 1.6em;
+    font-size: 1.4em;
     font-weight: 100;
+    font-style: italic;
+    text-align: center;
+
+    q {
+      display: block;
+      margin-bottom: 7px;
+    }
   }
 
   .btn--apps {

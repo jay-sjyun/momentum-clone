@@ -4,36 +4,64 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Momentum Clone</title>
+    <!-- 오픈 그래프 -->
+    <!-- 이미지 및 url 수정 필요 -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Momentum" />
+    <meta property="og:title" content="Momentum" />
+    <meta property="og:description" content="Manage your own to-do list." />
+    <meta property="og:image" content="../images/starbucks_seo.jpg" />
+    <meta property="og:url" content="https://starbucks.co.kr" />
+    <!-- 트위터 카드 -->
+    <!-- 이미지 및 url 수정 필요 -->
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:site" content="Momentum" />
+    <meta property="twitter:title" content="Momentum" />
+    <meta property="twitter:description" content="Manage your own to-do list." />
+    <meta property="twitter:image" content="../images/starbucks_seo.jpg" />
+    <meta property="twitter:url" content="https://starbucks.co.kr" />
+    <!-- Google Material Symbols and Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/main.css" />
-    <title>Momentum Clone</title>
     <script defer src="js/main.js"></script>
-    <script defer src="js/clock.js"></script>
-    <script defer src="js/quotes.js"></script>
-    <script defer src="js/background.js"></script>
     <script>
       window.addEventListener("load", () => {
+        weatherApp();
         signInAndOut();
+        ctrlBg();
+        clockApp();
+        quotesApp();
       });
     </script>
   </head>
   <body>
     <div class="wrap">
       <header>
-        <!-- <div class="bookmarks">
+        <div class="widget-wrap">
+          <!-- <div class="bookmarks">
           <button class="btn--links">Links</button>
         </div> -->
+          <div class="weather js-weather">
+            <span></span>
+            <span></span>
+            <span class="material-symbols-outlined js-weather-icon"></span>
+          </div>
+        </div>
         <h1 class="app-title">Momentum</h1>
-        <!-- <div class="weather"></div> -->
-        <!-- 추후 d-day 추가 -->
       </header>
       <div class="main">
-        <div class="clock js-clock">00:00:00</div>
+        <div class="clock">
+          <span class="clock--time js-clock-time">00:00:00</span>
+          <span class="clock--midday js-clock-midday">where is it?</span>
+          <!-- 추후 d-day 추가 -->
+        </div>
         <div class="sign-wrap js-sign-wrap">
           <form class="sign__form js-sign-form">
             <label class="question js-question">
               What is your name?
-              <input class="username js-username" type="text" maxlength="25" required autofocus />
+              <input class="username js-username" type="text" maxlength="15" required autofocus />
             </label>
             <button class="js-btn-signin">Sign In</button>
           </form>

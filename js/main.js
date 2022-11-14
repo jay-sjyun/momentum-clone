@@ -115,19 +115,28 @@ function signInAndOut() {
 
   const HIDDEN_CLASSNAME = "hidden";
 
-  function toggleSignInUI() {
-    $signInQuestion.classList.toggle(HIDDEN_CLASSNAME);
-    $signInBtn.classList.toggle(HIDDEN_CLASSNAME);
+  function hideSignInUI() {
+    $signInQuestion.classList.add(HIDDEN_CLASSNAME);
+    $signInBtn.classList.add(HIDDEN_CLASSNAME);
   }
 
-  function toggleToDo() {
-    $toDo.classList.toggle(HIDDEN_CLASSNAME);
+  function showToDo() {
+    $toDo.classList.remove(HIDDEN_CLASSNAME);
+    setTimeout(() => {
+      $toDo.classList.add("on");
+    }, 400);
   }
 
   function paintGreeting(username) {
     $greetingTxt.textContent = `Hi, ${username}`;
-    $greetingTxt.classList.toggle(HIDDEN_CLASSNAME);
-    $signOutBtn.classList.toggle(HIDDEN_CLASSNAME);
+    $greetingTxt.classList.remove(HIDDEN_CLASSNAME);
+    setTimeout(() => {
+      $greetingTxt.classList.add("on");
+    }, 10);
+    $signOutBtn.classList.remove(HIDDEN_CLASSNAME);
+    setTimeout(() => {
+      $signOutBtn.classList.add("on");
+    }, 200);
   }
 
   function handleSignOut() {
@@ -143,21 +152,28 @@ function signInAndOut() {
 
     currentUsername = username;
     localStorage.setItem(USERNAME_KEY, username);
-    toggleSignInUI();
+    hideSignInUI();
     $signOutBtn.addEventListener("click", handleSignOut);
     paintGreeting(username);
-    toggleToDo();
+    showToDo();
     toDoApp();
   }
 
   $signForm.addEventListener("submit", handleSignIn);
 
   if (currentUsername !== null) {
-    toggleSignInUI();
+    hideSignInUI();
     $signOutBtn.addEventListener("click", handleSignOut);
     paintGreeting(currentUsername);
-    toggleToDo();
+    showToDo();
     toDoApp();
+  } else {
+    setTimeout(() => {
+      $signInQuestion.classList.add("on");
+    }, 10);
+    setTimeout(() => {
+      $signInBtn.classList.add("on");
+    }, 200);
   }
 }
 

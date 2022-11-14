@@ -95,9 +95,17 @@ footer,
     margin-bottom: 5vh;
     font-size: 2.6rem;
     text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.5s all;
 
     &.hidden {
       display: none;
+    }
+
+    &.on {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 
@@ -119,15 +127,23 @@ footer,
     border-radius: 2rem;
     font-size: 2rem;
     font-weight: 300;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: background-color 0.3s, opacity 0.5s 0.2s, transform 0.5s 0.2s;
+    cursor: pointer;
+
     &:hover,
     &:focus {
       background-color: rgba($color: #fff, $alpha: 0.3);
     }
-    transition: 0.2s all;
-    cursor: pointer;
 
     &.hidden {
       display: none;
+    }
+
+    &.on {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 
@@ -135,12 +151,28 @@ footer,
     margin-bottom: 5vh;
     font-size: 3.2rem;
     text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.5s all;
+
+    &.on {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 
 .todo-wrap {
   width: 90%;
   max-width: 560px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s 0.4s;
+
+  &.on {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .todo-form {
@@ -283,7 +315,7 @@ footer {
   }
 }
 
-@media only screen and (min-width: 1280px) {
+@media only screen and (min-width: 1367px) {
   ::-webkit-scrollbar {
     width: 10px;
   }

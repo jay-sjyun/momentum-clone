@@ -90,9 +90,16 @@ footer,
   margin-bottom: 5vh;
   font-size: 2.6rem;
   text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.5s all;
 }
 .sign-wrap .question.hidden {
   display: none;
+}
+.sign-wrap .question.on {
+  opacity: 1;
+  transform: translateY(0);
 }
 .sign-wrap .username {
   display: block;
@@ -111,7 +118,9 @@ footer,
   border-radius: 2rem;
   font-size: 2rem;
   font-weight: 300;
-  transition: 0.2s all;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: background-color 0.3s, opacity 0.5s 0.2s, transform 0.5s 0.2s;
   cursor: pointer;
 }
 .sign-wrap button:hover, .sign-wrap button:focus {
@@ -120,15 +129,33 @@ footer,
 .sign-wrap button.hidden {
   display: none;
 }
+.sign-wrap button.on {
+  opacity: 1;
+  transform: translateY(0);
+}
 .sign-wrap .greeting {
   margin-bottom: 5vh;
   font-size: 3.2rem;
   text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.5s all;
+}
+.sign-wrap .greeting.on {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .todo-wrap {
   width: 90%;
   max-width: 560px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s 0.4s;
+}
+.todo-wrap.on {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .todo-form {
@@ -241,7 +268,7 @@ footer .quote q {
     margin-bottom: 10px;
   }
 }
-@media only screen and (min-width: 1280px) {
+@media only screen and (min-width: 1367px) {
   ::-webkit-scrollbar {
     width: 10px;
   }

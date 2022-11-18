@@ -114,6 +114,7 @@ function signInAndOut() {
   const $toDo = document.querySelector(".js-todo-wrap");
 
   const HIDDEN_CLASSNAME = "hidden";
+  const ON_CLASSNAME = "on";
 
   function hideSignInUI() {
     $signInQuestion.classList.add(HIDDEN_CLASSNAME);
@@ -123,7 +124,7 @@ function signInAndOut() {
   function showToDo() {
     $toDo.classList.remove(HIDDEN_CLASSNAME);
     setTimeout(() => {
-      $toDo.classList.add("on");
+      $toDo.classList.add(ON_CLASSNAME);
     }, 400);
   }
 
@@ -131,11 +132,11 @@ function signInAndOut() {
     $greetingTxt.textContent = `Hi, ${username}`;
     $greetingTxt.classList.remove(HIDDEN_CLASSNAME);
     setTimeout(() => {
-      $greetingTxt.classList.add("on");
+      $greetingTxt.classList.add(ON_CLASSNAME);
     }, 10);
     $signOutBtn.classList.remove(HIDDEN_CLASSNAME);
     setTimeout(() => {
-      $signOutBtn.classList.add("on");
+      $signOutBtn.classList.add(ON_CLASSNAME);
     }, 200);
   }
 
@@ -168,11 +169,13 @@ function signInAndOut() {
     showToDo();
     toDoApp();
   } else {
+    $signInQuestion.classList.remove(HIDDEN_CLASSNAME);
     setTimeout(() => {
-      $signInQuestion.classList.add("on");
+      $signInQuestion.classList.add(ON_CLASSNAME);
     }, 10);
+    $signInBtn.classList.remove(HIDDEN_CLASSNAME);
     setTimeout(() => {
-      $signInBtn.classList.add("on");
+      $signInBtn.classList.add(ON_CLASSNAME);
     }, 200);
   }
 }

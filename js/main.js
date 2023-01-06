@@ -1,6 +1,6 @@
 "use strict";
 
-const URL = "http://dev-yun0525.github.io/momentum-clone/db.json/todos";
+const URL = "https://my-json-server.typicode.com/dev-yun0525/fakedb/todos";
 const USERNAME_KEY = "username";
 
 let currentUsername = localStorage.getItem(USERNAME_KEY);

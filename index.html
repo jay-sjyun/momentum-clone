@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Momentum Clone</title>
+    <title>My Mini-Apps</title>
     <!-- 오픈 그래프 -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Momentum" />
@@ -28,7 +28,9 @@
     <script defer src="js/main.js"></script>
     <script>
       window.addEventListener("load", () => {
-        weatherApp();
+        ctrlModal();
+        newsApp();
+        // weatherApp();
         signInAndOut();
         ctrlBg();
         clockApp();
@@ -37,21 +39,29 @@
     </script>
   </head>
   <body>
-    <div class="wrap">
+    <div class="center-wrap">
       <header>
-        <div class="widget-wrap">
-          <!-- <div class="bookmarks">
-          <button class="btn--links">Links</button>
+        <nav class="nav">
+          <ul class="nav__list js-nav__list">
+            <li>
+              <button class="nav__btn js-nav__btn" data-modal-category="news">뉴스</button>
+            </li>
+            <li>
+              <button class="nav__btn js-nav__btn" data-modal-category="todo">할 일</button>
+            </li>
+            <li>
+              <button class="nav__btn js-nav__btn" data-modal-category="weather">날씨</button>
+            </li>
+          </ul>
+        </nav>
+        <!-- <div class="weather js-weather">
+          <span></span>
+          <span></span>
+          <span class="material-symbols-outlined js-weather-icon"></span>
         </div> -->
-          <div class="weather js-weather">
-            <span></span>
-            <span></span>
-            <span class="material-symbols-outlined js-weather-icon"></span>
-          </div>
-        </div>
-        <h1 class="app-title">Momentum</h1>
+        <h1 class="app-title">My Mini-Apps</h1>
       </header>
-      <div class="main">
+      <main class="main">
         <div class="clock">
           <span class="clock--time js-clock-time">00:00:00</span>
           <span class="clock--midday js-clock-midday"></span>
@@ -60,13 +70,13 @@
         <div class="sign-wrap js-sign-wrap">
           <form class="sign__form js-sign-form">
             <label class="question hidden js-question">
-              What is your name?
+              이름을 적어주세요.
               <input class="username js-username" type="text" maxlength="15" value="David" required autofocus />
             </label>
-            <button class="hidden js-btn-signin">Sign In</button>
+            <button class="hidden js-btn-signin">로그인</button>
           </form>
           <p class="greeting hidden js-greeting"></p>
-          <button class="hidden js-btn-signout">Sign Out</button>
+          <button class="hidden js-btn-signout">로그아웃</button>
         </div>
         <div class="todo-wrap js-todo-wrap hidden">
           <form class="todo-form js-todo-form">
@@ -74,14 +84,43 @@
           </form>
           <ul class="todo-list js-todo-list"></ul>
         </div>
-      </div>
+      </main>
       <footer>
         <div class="quote js-quote">
           <q></q>
           <span></span>
         </div>
-        <!-- <button class="btn--apps">Apps</button> -->
       </footer>
     </div>
+    <dialog class="modal js-modal" data-modal-category="news">
+      <div class="modal__header">
+        <h2 class="modal__title">뉴스</h2>
+        <button class="modal__close-btn js-modal__close-btn">
+          <span class="modal__close-icon material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="modal__content">
+        <p class="loading-text js-loading-text"></p>
+        <ul class="news-list js-news-list"></ul>
+      </div>
+    </dialog>
+    <dialog class="modal js-modal" data-modal-category="todo">
+      <div class="modal__header">
+        <h2 class="modal__title">할 일</h2>
+        <button class="modal__close-btn js-modal__close-btn">
+          <span class="modal__close-icon material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div>바로가기 내용</div>
+    </dialog>
+    <dialog class="modal js-modal" data-modal-category="weather">
+      <div class="modal__header">
+        <h2 class="modal__title">날씨</h2>
+        <button class="modal__close-btn js-modal__close-btn">
+          <span class="modal__close-icon material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div>바로가기 내용</div>
+    </dialog>
   </body>
 </html>

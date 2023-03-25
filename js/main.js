@@ -37,78 +37,34 @@ const httpRequest = {
   },
 };
 
-// 날씨 앱
-function weatherApp() {
-  const $locationInfo = document.querySelector(".js-weather span:first-of-type");
-  const $weatherInfo = document.querySelector(".js-weather span:nth-child(2)");
-  const $weatherIcon = document.querySelector(".js-weather-icon");
+// 모달 조작
+const ctrlModal = () => {
+  const $modals = document.querySelectorAll(".js-modal");
 
-  const API_KEY = "a155f00c11c73a1d9b10cc6ab623767b";
+  const openModal = (e) => {
+    if (!e.target.classList.contains("js-nav__btn")) return;
+    const modalCategory = e.target.dataset.modalCategory;
+    const $targetModal = document.querySelector(`.js-modal[data-modal-category='${modalCategory}']`);
 
-  /** 위치정보를 받아 날씨정보 불러오기(AJAX) 및 데이터 후속 처리 */
-  async function fetchWeatherInfo(lat, lon) {
-    const response = await httpRequest.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`);
-    const dataObj = await response.json();
-    const currentWeather = dataObj.weather[0].main;
-    let weatherIcon;
+    $modals.forEach((elm) => elm.classList.remove("on"));
+    $targetModal.showModal();
+    $targetModal.classList.add("on");
+  };
 
-    switch (currentWeather) {
-      case "Clear":
-        weatherIcon = "Sunny";
-        break;
-      case "Clouds":
-        weatherIcon = "Cloud";
-        break;
-      case "Thunderstorm":
-        weatherIcon = "Thunderstorm";
-        break;
-      case "Drizzle":
-        weatherIcon = "Rainy";
-        break;
-      case "Rain":
-        weatherIcon = "Rainy";
-        break;
-      case "Snow":
-        weatherIcon = "Weather Snowy";
-        break;
-      case "Mist":
-      case "Smoke":
-      case "Haze":
-      case "Dust":
-      case "Fog":
-      case "Sand":
-      case "Ash":
-      case "Squall":
-        weatherIcon = "Foggy";
-        break;
-      case "Tornado":
-        weatherIcon = "Cyclone";
-        break;
-      default:
-        weatherIcon = "";
-    }
+  const closeModal = (e) => {
+    if (!e.target.parentElement.classList.contains("js-modal__close-btn")) return;
 
-    $locationInfo.textContent = `${dataObj.name}, `;
-    $weatherInfo.textContent = currentWeather;
-    $weatherIcon.textContent = weatherIcon;
-  }
+    $modals.forEach((elm) => {
+      if (elm.contains(e.target)) {
+        elm.classList.remove("on");
+        elm.close();
+      }
+    });
+  };
 
-  /** 위치정보 취득 성공 처리 */
-  function geoSuccess(position) {
-    const lat = position.coords.latitude;
-    const lon = position.coords.longitude;
-
-    /** 취득한 위치정보 바탕으로 날씨정보 불러오기 (AJAX) */
-    fetchWeatherInfo(lat, lon).catch(console.error);
-  }
-
-  /** 위치정보 취득 실패 처리 */
-  function geoError() {
-    alert("Failed to get your location :(");
-  }
-
-  navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
-}
+  document.body.addEventListener("click", openModal);
+  document.body.addEventListener("click", closeModal);
+};
 
 // 로그인 및 로그아웃
 function signInAndOut() {
@@ -196,6 +152,53 @@ function signInAndOut() {
   }
 }
 
+// 뉴스 앱
+const newsApp = () => {
+  const $newsOpenBtn = document.querySelector(".js-nav__btn[data-modal-category='news']");
+  const $newsModal = document.querySelector(".js-modal[data-modal-category='news']");
+  const $loadingTxt = $newsModal.querySelector(".js-loading-text");
+  const $newsList = $newsModal.querySelector(".js-news-list");
+  const $newsFragment = document.createDocumentFragment();
+
+  const NEWS_API = `https://newsapi.org/v2/top-headlines?country=kr&apiKey=509e5683a97a4d0995f41662e21d9520`;
+
+  const paintArticle = (data) => {
+    const $li = document.createElement("li");
+    $li.classList.add("news-item");
+    const $title = document.createElement("a");
+    $title.textContent = `${data.title}`;
+    $title.href = `${data.url}`;
+    $title.target = `_blank`;
+    $title.classList.add("news-title");
+    $li.append($title);
+    const $author = document.createElement("span");
+    $author.textContent = `${data.author}`;
+    $author.classList.add("news-author");
+    $li.append($author);
+    $newsFragment.append($li);
+  };
+
+  const fetchNews = async () => {
+    $loadingTxt.textContent = "불러오는 중...";
+    const response = await httpRequest.get(NEWS_API);
+    const data = await response.json();
+    const articles = data.articles;
+    if (articles) {
+      $loadingTxt.textContent = "";
+      articles.forEach((article) => paintArticle(article));
+      $newsList.append($newsFragment);
+    }
+  };
+
+  $newsOpenBtn.addEventListener("click", () => {
+    $newsList.textContent = "";
+    fetchNews().catch((reason) => {
+      console.error(reason);
+      $loadingTxt.textContent = "불러오기 실패";
+    });
+  });
+};
+
 // 할일 앱
 function toDoApp() {
   const $toDo = document.querySelector(".js-todo-wrap");
@@ -265,6 +268,79 @@ function toDoApp() {
   fetchToDo().catch(console.error);
 }
 
+// 날씨 앱
+const weatherApp = () => {
+  const $locationInfo = document.querySelector(".js-weather span:first-of-type");
+  const $weatherInfo = document.querySelector(".js-weather span:nth-child(2)");
+  const $weatherIcon = document.querySelector(".js-weather-icon");
+
+  const API_KEY = "a155f00c11c73a1d9b10cc6ab623767b";
+
+  /** 위치정보를 받아 날씨정보 불러오기(AJAX) 및 데이터 후속 처리 */
+  const fetchWeatherInfo = async (lat, lon) => {
+    const response = await httpRequest.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`);
+    const dataObj = await response.json();
+    const currentWeather = dataObj.weather[0].main;
+    let weatherIcon;
+
+    switch (currentWeather) {
+      case "Clear":
+        weatherIcon = "Sunny";
+        break;
+      case "Clouds":
+        weatherIcon = "Cloud";
+        break;
+      case "Thunderstorm":
+        weatherIcon = "Thunderstorm";
+        break;
+      case "Drizzle":
+        weatherIcon = "Rainy";
+        break;
+      case "Rain":
+        weatherIcon = "Rainy";
+        break;
+      case "Snow":
+        weatherIcon = "Weather Snowy";
+        break;
+      case "Mist":
+      case "Smoke":
+      case "Haze":
+      case "Dust":
+      case "Fog":
+      case "Sand":
+      case "Ash":
+      case "Squall":
+        weatherIcon = "Foggy";
+        break;
+      case "Tornado":
+        weatherIcon = "Cyclone";
+        break;
+      default:
+        weatherIcon = "";
+    }
+
+    $locationInfo.textContent = `${dataObj.name}, `;
+    $weatherInfo.textContent = currentWeather;
+    $weatherIcon.textContent = weatherIcon;
+  };
+
+  /** 위치정보 취득 성공 처리 */
+  function geoSuccess(position) {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+
+    /** 취득한 위치정보 바탕으로 날씨정보 불러오기 (AJAX) */
+    fetchWeatherInfo(lat, lon).catch(console.error);
+  }
+
+  /** 위치정보 취득 실패 처리 */
+  function geoError() {
+    alert("Failed to get your location :(");
+  }
+
+  navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
+};
+
 // 배경 설정
 function ctrlBg() {
   const images = ["0.jpg", "1.jpg", "2.jpg", "3.jpg"];
@@ -291,8 +367,8 @@ function clockApp() {
       midday = "AM";
     }
     const minutes = String(date.getMinutes()).padStart(2, "0");
-    const seconds = String(date.getSeconds()).padStart(2, "0");
-    $clock.textContent = `${hours}:${minutes}:${seconds}`;
+    // const seconds = String(date.getSeconds()).padStart(2, "0");
+    $clock.textContent = `${hours}:${minutes}`;
     $midday.textContent = midday;
   }
 

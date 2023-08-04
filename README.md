@@ -1,6 +1,6 @@
 # 프로젝트명 : Momentum 클론 홈페이지
 
-# 배포 : [Github page](https://dev-yun0525.github.io/momentum-clone "깃허브 페이지로 이동")
+# 배포 : [Github page](https://jay-sjyun.github.io/momentum-clone "깃허브 페이지로 이동")
 
 # 기술 스택 : HTML5, CSS(SCSS), Javascript(Vanilla)
 

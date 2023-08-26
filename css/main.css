@@ -1,8 +1,5 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap");
-.hidden {
-  display: none;
-}
-
 html {
   font-size: 62.5%;
 }
@@ -19,8 +16,10 @@ textarea,
 
 body {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -31,350 +30,419 @@ body {
 }
 
 ::-webkit-scrollbar-track {
+  border-radius: 8px;
   background: rgba(255, 255, 255, 0.3);
 }
 
 ::-webkit-scrollbar-thumb {
+  border-radius: 8px;
   background: rgba(255, 255, 255, 0.8);
 }
 
-.center-wrap {
+/*==============================================
+|||||||||||||||||||||||||||||||||||||||||||||||||
+  모바일 Mobile
+|||||||||||||||||||||||||||||||||||||||||||||||||
+================================================*/
+/*<----------헤더 header---------->*/
+.header {
   display: flex;
-  flex-direction: column;
-  height: 100vh;
-  max-width: 1024px;
-  width: 100%;
-  margin: 0 auto;
-}
-
-header,
-footer,
-.main {
-  padding: 10px 15px;
-}
-
-.nav__list {
-  display: flex;
+  justify-content: space-between;
   align-items: center;
-  overflow-x: scroll;
-  scrollbar-width: none;
+  min-height: 64px;
+  padding: 0 16px;
 }
-.nav__list::-webkit-scrollbar {
+.header.hidden {
   display: none;
 }
-.nav__list li {
-  flex-shrink: 0;
+.header .menu-list {
+  display: flex;
+  margin-right: 8px;
+  padding: 8px 0;
 }
-.nav__list li + li {
-  margin-left: 10px;
+.header .menu-list li + li {
+  margin-left: 8px;
 }
-.nav__list .nav__btn {
+.header .btn--menu {
+  padding: 10px 24px;
+  border: 1px solid #fff;
+  border-radius: 40px;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+.header .btn--menu:hover, .header .btn--menu:focus {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+.header .weather {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+}
+.header .weather .txt-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.header .weather .material-symbols-outlined {
+  width: 20px;
+  height: 20px;
+  margin-left: 4px;
+  padding-bottom: 4px;
+  font-variation-settings: "FILL" 0, "wght" 100, "GRAD" 0, "opsz" 48;
+}
+.header .weather__txt {
+  font-size: 1.4rem;
+  line-height: 1.5;
+  font-style: italic;
+  font-weight: 300;
+  word-break: break-all;
+}
+.header .weather__txt + .weather__txt {
+  margin-left: 4px;
+}
+
+/*<----------메인 main---------->*/
+.main {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px;
-  border: 1px solid #fff;
-  border-radius: 1.4rem;
-  font-size: 1.4rem;
-  cursor: pointer;
+  flex-grow: 1;
+  padding: 0 16px;
 }
-
-.app-title {
-  margin-top: 35px;
+.main .signin-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+.main .signin-form.hidden {
+  display: none;
+}
+.main .question {
+  margin-bottom: 24px;
+  font-size: 2.2rem;
+  line-height: 1.5;
+  font-weight: 700;
+}
+.main .input--username {
+  max-width: 256px;
+  margin-bottom: 24px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #ddd;
+  font-size: 2.2rem;
+  line-height: 1.5;
+  font-weight: 700;
+  text-align: center;
+}
+.main .input--username::placeholder {
+  color: #fff;
+  opacity: 0.8;
+}
+.main .btn--signin {
+  padding: 10px 24px;
+  border: 1px solid #fff;
+  border-radius: 40px;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  text-align: center;
+  transition: 0.2s ease-in-out;
+}
+.main .btn--signin:hover, .main .btn--signin:focus {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+.main .home-wrap.hidden {
+  display: none;
+}
+.main .clock {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.main .time {
+  margin-right: 4px;
+  font-size: 4rem;
+  line-height: 1.3;
+  font-weight: 100;
+}
+.main .midday {
+  padding-bottom: 4px;
   font-size: 3.2rem;
+  line-height: 1.3;
+  font-weight: 100;
+}
+.main .greeting {
+  margin-top: 16px;
+  font-size: 2.2rem;
+  line-height: 1.5;
   font-weight: 700;
   text-align: center;
 }
 
-.main {
+/*<----------푸터 footer---------->*/
+.footer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
+  align-items: flex-end;
+  padding: 16px;
 }
-
-.clock {
-  margin-bottom: 5vh;
-  font-weight: 100;
-}
-.clock .clock--time {
-  font-size: 4.8rem;
-  vertical-align: bottom;
-}
-.clock .clock--midday {
-  display: inline-block;
-  margin-left: 3px;
-  padding-bottom: 2px;
-  font-size: 3.2rem;
-  vertical-align: bottom;
-}
-
-.sign-wrap {
-  width: 100%;
-  margin-bottom: 5vh;
-}
-.sign-wrap .question {
-  display: block;
-  margin-bottom: 5vh;
-  font-size: 2.6rem;
-  text-align: center;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: 0.5s all;
-}
-.sign-wrap .question.hidden {
+.footer.hidden {
   display: none;
 }
-.sign-wrap .question.on {
-  opacity: 1;
-  transform: translateY(0);
-}
-.sign-wrap .username {
-  display: block;
-  width: 80%;
-  max-width: 560px;
-  margin: 15px auto 0;
-  border-bottom: 2px solid #fff;
-  font-size: 2.6rem;
-  text-align: center;
-}
-.sign-wrap button {
-  display: block;
-  margin: 0 auto;
-  padding: 10px 15px;
-  border: 2px solid #fff;
-  border-radius: 2rem;
-  font-size: 2rem;
+.footer .quote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 32px;
+  font-size: 1.4rem;
+  line-height: 1.5;
   font-weight: 300;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: background-color 0.3s, opacity 0.5s 0.2s, transform 0.5s 0.2s;
-  cursor: pointer;
-}
-.sign-wrap button:hover, .sign-wrap button:focus {
-  background-color: rgba(255, 255, 255, 0.3);
-}
-.sign-wrap button.hidden {
-  display: none;
-}
-.sign-wrap button.on {
-  opacity: 1;
-  transform: translateY(0);
-}
-.sign-wrap .greeting {
-  margin-bottom: 5vh;
-  font-size: 3.2rem;
-  text-align: center;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: 0.5s all;
-}
-.sign-wrap .greeting.on {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.todo-wrap {
-  width: 90%;
-  max-width: 560px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.5s 0.4s;
-}
-.todo-wrap.on {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.todo-form {
-  display: block;
-  width: 100%;
-  margin-bottom: 16px;
-}
-.todo-form .new-todo {
-  display: block;
-  width: 100%;
-  border-bottom: 1px solid #fff;
-  margin: 0 auto;
-  padding-bottom: 5px;
-  font-size: 1.6rem;
-  text-align: center;
-}
-
-.todo-list {
-  height: 100%;
-  max-height: 17vh;
-  overflow-y: auto;
-  padding-right: 8px;
-  font-size: 1.6rem;
-}
-.todo-list li {
-  display: flex;
-  align-items: center;
-  padding: 4px 0;
-}
-.todo-list li span {
-  flex-grow: 1;
-  padding-right: 5px;
-}
-.todo-list li button {
-  font-size: 1.4rem;
-  cursor: pointer;
-}
-
-footer {
-  display: flex;
-  flex-direction: column;
-}
-footer .quote {
-  align-self: center;
-  font-size: 1.4rem;
-  font-weight: 100;
   font-style: italic;
   text-align: center;
 }
-footer .quote q {
-  display: block;
-  margin-bottom: 7px;
+.footer .quote q {
+  margin-bottom: 8px;
+}
+.footer .btn--signout {
+  padding: 10px 24px;
+  border: 1px solid #fff;
+  border-radius: 40px;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+.footer .btn--signout:hover, .footer .btn--signout:focus {
+  background-color: rgba(255, 255, 255, 0.25);
 }
 
+/*<----------모달 modal---------->*/
 .modal {
   overflow: hidden;
-  width: calc(100% - 24px);
-  max-width: 480px;
-  max-height: calc(100vh - 18px);
-  padding: 15px 15px 25px;
-  border: 1px solid #fff;
-  border-radius: 10px;
-  background: transparent;
-  opacity: 0;
-  transition: opacity 0.2s;
-  box-sizing: border-box;
-  backdrop-filter: blur(8px);
-}
-.modal.on {
-  opacity: 1;
-}
-.modal::backdrop {
+  top: calc(1.4rem + 50px);
+  left: 16px;
   width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.55);
+  max-width: calc(100vw - 32px);
+  margin: 0;
+  padding: 16px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(30, 30, 30, 0.97);
+  box-sizing: border-box;
 }
 .modal .modal__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 10px;
-  margin-bottom: 25px;
-  border-bottom: 1px solid #fff;
+  margin-bottom: 16px;
 }
 .modal .modal__title {
-  padding-left: 5px;
-  font-size: 3.2rem;
+  font-size: 2.2rem;
+  line-height: 1.5;
   font-weight: 700;
 }
-.modal .modal__close-icon {
-  border-radius: 50%;
-  font-size: 4rem;
+.modal .btn--close-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 32px;
+  background-color: #5b5b5b;
   cursor: pointer;
+  transition: 0.2s ease-in-out;
 }
-.modal .modal__content {
-  height: 60vh;
+.modal .btn--close-modal:hover, .modal .btn--close-modal:focus {
+  background-color: #8b8b8b;
 }
-.modal .loading-text {
-  font-size: 2rem;
+.modal .btn--close-modal .material-symbols-outlined {
+  font-size: 2.4rem;
+  font-variation-settings: "FILL" 0, "wght" 100, "GRAD" 0, "opsz" 48;
 }
-.modal[data-modal-category=news] .modal__content {
-  overflow: auto;
+.modal .todo-form {
+  margin-bottom: 16px;
 }
-.modal[data-modal-category=news] .news-list {
-  display: flex;
-  flex-direction: column;
-  padding-right: 5px;
-}
-.modal[data-modal-category=news] .news-item {
-  display: flex;
-  flex-direction: column;
-}
-.modal[data-modal-category=news] .news-item + .news-item {
-  margin-top: 10px;
-}
-.modal[data-modal-category=news] .news-title {
-  overflow: hidden;
-  margin-bottom: 5px;
-  font-size: 1.6rem;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-.modal[data-modal-category=news] .news-title:hover {
-  text-decoration: underline;
-}
-.modal[data-modal-category=news] .news-author {
-  color: darkgray;
+.modal .input--todo {
+  width: 240px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #ddd;
   font-size: 1.4rem;
+  line-height: 1.5;
+}
+.modal .input--todo::placeholder {
+  color: #ddd;
+}
+.modal .todo-list {
+  overflow: auto;
+  max-height: 40vh;
+  padding-right: 12px;
+}
+.modal .todo-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px;
+  border-radius: 4px;
+  transition: 0.2s ease-in-out;
+}
+.modal .todo-list li:hover, .modal .todo-list li:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.modal .todo-list li:hover .btn--del-todo, .modal .todo-list li:focus .btn--del-todo {
+  color: #fff;
+}
+.modal .todo-content {
+  margin-right: 12px;
+  font-size: 1.4rem;
+  line-height: 1.5;
+}
+.modal .btn--del-todo {
+  flex-shrink: 0;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  font-weight: 300;
+  color: #ddd;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+.modal .btn--del-todo:hover, .modal .btn--del-todo:focus {
+  color: #fff;
+}
+.modal .loading-txt {
+  font-size: 1.4rem;
+  line-height: 1.5;
+}
+.modal .news-list {
+  overflow: auto;
+  max-height: 40vh;
+  padding-right: 8px;
+}
+.modal .news-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px;
+  border-radius: 4px;
+  transition: 0.2s ease-in-out;
+}
+.modal .news-item:hover, .modal .news-item:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.modal .news-title {
+  margin-right: 12px;
+  font-size: 1.4rem;
+  line-height: 1.5;
+}
+.modal .news-source {
+  flex-shrink: 0;
+  width: 5rem;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  font-weight: 300;
+  color: #ddd;
 }
 
-@media only screen and (min-width: 768px) {
-  .weather {
+/*==============================================
+|||||||||||||||||||||||||||||||||||||||||||||||||
+  태블릿 Tablet
+|||||||||||||||||||||||||||||||||||||||||||||||||
+================================================*/
+@media only screen and (min-width: 744px) {
+  /*<----------메인 main---------->*/
+  .main .question {
+    margin-bottom: 32px;
+    font-size: 3.3rem;
+  }
+  .main .input--username {
+    max-width: 400px;
+    margin-bottom: 32px;
+    font-size: 3.3rem;
+  }
+  .main .btn--signin {
+    border-radius: 60px;
     font-size: 2.1rem;
   }
-  .weather .material-symbols-outlined {
-    font-size: 2.1rem;
+  .main .time {
+    font-size: 6rem;
   }
-  .app-title {
-    margin-top: 30px;
+  .main .midday {
+    padding-bottom: 5px;
     font-size: 4.8rem;
   }
-  .clock .clock--time {
-    font-size: 7.2rem;
+  .main .greeting {
+    font-size: 3.3rem;
   }
-  .clock .clock--midday {
-    font-size: 4.8rem;
+  /*<----------모달 modal---------->*/
+  .modal {
+    max-width: 480px;
   }
-  .sign-wrap .question {
-    font-size: 3.9rem;
+  .modal .input--todo {
+    width: 320px;
   }
-  .sign-wrap .username {
-    font-size: 3.9rem;
-  }
-  .sign-wrap button {
-    padding: 15px 23px;
-    border-radius: 3rem;
-    font-size: 3rem;
-  }
-  .sign-wrap .greeting {
-    font-size: 4.8rem;
-  }
-  .todo-form {
-    margin-bottom: 24px;
-  }
-  .todo-form .new-todo {
-    padding-bottom: 7px;
-    font-size: 2.4rem;
-  }
-  .todo-list {
-    font-size: 2.4rem;
-  }
-  .todo-list li {
-    padding: 6px 0;
-  }
-  .todo-list li span {
-    flex-grow: 1;
-    padding-right: 7px;
-  }
-  .todo-list li button {
-    font-size: 2.1rem;
-  }
-  footer .quote {
-    font-size: 2.1rem;
-  }
-  footer .quote q {
-    margin-bottom: 10px;
+  .modal .news-source {
+    width: 8rem;
   }
 }
-@media only screen and (min-width: 1367px) {
-  .todo-list li:hover {
-    background-color: rgba(0, 0, 0, 0.3);
+/*==============================================
+|||||||||||||||||||||||||||||||||||||||||||||||||
+  데스크탑, 노트북 PC Desktop, Laptop
+|||||||||||||||||||||||||||||||||||||||||||||||||
+================================================*/
+@media only screen and (min-width: 1025px) {
+  /*<----------헤더 header---------->*/
+  .header .btn--menu {
+    font-size: 1.6rem;
+  }
+  .header .weather .material-symbols-outlined {
+    width: 24px;
+    height: 24px;
+    padding-bottom: 0px;
+  }
+  .header .weather__txt {
+    font-size: 1.6rem;
+  }
+  /*<----------푸터 footer---------->*/
+  .footer .quote {
+    font-size: 1.6rem;
+  }
+  .footer .btn--signout {
+    font-size: 1.6rem;
+  }
+  /*<----------모달 modal---------->*/
+  .modal {
+    top: calc(1.6rem + 50px);
+    max-width: 640px;
+  }
+  .modal .modal__header {
+    margin-bottom: 24px;
+  }
+  .modal .modal__title {
+    font-size: 2.4rem;
+  }
+  .modal .btn--close-modal {
+    width: 36px;
+    height: 36px;
+    border-radius: 36px;
+  }
+  .modal .input--todo {
+    font-size: 1.6rem;
+  }
+  .modal .todo-content {
+    font-size: 1.6rem;
+  }
+  .modal .btn--del-todo {
+    font-size: 1.4rem;
+  }
+  .modal .loading-txt {
+    font-size: 1.6rem;
+  }
+  .modal .news-title {
+    font-size: 1.6rem;
+  }
+  .modal .news-source {
+    font-size: 1.4rem;
   }
 }/*# sourceMappingURL=main.css.map */

@@ -19,13 +19,13 @@
 할일 등록 시 객체 생성 및 정보 저장  
 배열로 전달하여 로컬 스토리지에 저장
 1. 뉴스 :  
-원격 API를 호출하여 뉴스 데이터 불러오기
+원격 API를 호출하여 뉴스 데이터 불러오기  
 불러온 데이터를 바탕으로 동적으로 DOM element 생성
 1. 로그아웃 : 로그아웃 시 localStorage에 저장된 사용자 이름 삭제 및 UI 초기화
 1. 실시간 시계 : 오전/오후 구분
 1. 무작위 인용구/배경 출력
 
-# 상세 설명 :
-[임시 DB](https://my-json-server.typicode.com/jay-sjyun/fakedb)  
+# 임시 DB 보기 :
+[my json server 링크](https://my-json-server.typicode.com/jay-sjyun/fakedb)  
 
 

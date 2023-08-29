@@ -25,7 +25,4 @@
 1. 실시간 시계 : 오전/오후 구분
 1. 무작위 인용구/배경 출력
 
-# 임시 DB 보기 :
-[my json server 링크](https://my-json-server.typicode.com/jay-sjyun/fakedb)  
-
 

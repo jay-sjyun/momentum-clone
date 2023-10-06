@@ -91,16 +91,14 @@ const newsApp = () => {
   const $newsList = document.querySelector(".js-news-list");
   const $newsFragment = document.createDocumentFragment();
 
-  // const NEWS_API = `https://newsapi.org/v2/top-headlines?country=kr&apiKey=956d67a3a5fe45a2b60bb2f789870a46`;
-
-  const NEWS_API = "https://api.currentsapi.services/v1/latest-news?" + "language=us&" + "apiKey=c8MTKqAAmJQ87nIz_YJB--RQAI7iqLuGrmyzgyaWMHSm-ceX";
+  const NEWS_API = `https://api.nytimes.com/svc/topstories/v2/world.json?api-key=rIRPI3JdsjHDKZ7yG69GL16a5ebNZjTc`;
 
   const paintArticle = (data) => {
     const $li = document.createElement("li");
     $li.classList.add("news-item");
-    const fullHeadline = data.title;
+    const headline = data.title;
     // 뉴스 헤드라인 추출
-    const headline = fullHeadline.substring(0, fullHeadline.indexOf("-") - 1);
+    // const headline = fullHeadline.substring(0, fullHeadline.indexOf("-") - 1);
     const $title = document.createElement("a");
     $title.textContent = `${headline}`;
     $title.href = `${data.url}`;
@@ -108,11 +106,11 @@ const newsApp = () => {
     $title.classList.add("news-title");
     $li.append($title);
     // 뉴스 출처 추출
-    const source = fullHeadline.substring(fullHeadline.lastIndexOf("-") + 1);
-    const $source = document.createElement("span");
-    $source.textContent = `${source}`;
-    $source.classList.add("news-source");
-    $li.append($source);
+    const author = data.byline.substring(3);
+    const $author = document.createElement("span");
+    $author.textContent = `${author}`;
+    $author.classList.add("news-source");
+    $li.append($author);
     $newsFragment.append($li);
   };
 
@@ -120,8 +118,8 @@ const newsApp = () => {
     $loadingTxt.textContent = "Loading...";
     const response = await fetch(NEWS_API);
     const data = await response.json();
-    console.log(data);
-    const articles = data.articles.slice(0, 10);
+    const articles = data.results.slice(1, 9);
+    console.log(articles);
     if (articles) {
       $loadingTxt.textContent = "";
       articles.forEach((article) => paintArticle(article));

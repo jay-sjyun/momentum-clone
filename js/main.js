@@ -91,7 +91,9 @@ const newsApp = () => {
   const $newsList = document.querySelector(".js-news-list");
   const $newsFragment = document.createDocumentFragment();
 
-  const NEWS_API = `https://newsapi.org/v2/top-headlines?country=kr&apiKey=956d67a3a5fe45a2b60bb2f789870a46`;
+  // const NEWS_API = `https://newsapi.org/v2/top-headlines?country=kr&apiKey=956d67a3a5fe45a2b60bb2f789870a46`;
+
+  const NEWS_API = "https://api.currentsapi.services/v1/latest-news?" + "language=us&" + "c8MTKqAAmJQ87nIz_YJB--RQAI7iqLuGrmyzgyaWMHSm-ceX";
 
   const paintArticle = (data) => {
     const $li = document.createElement("li");
@@ -118,6 +120,7 @@ const newsApp = () => {
     $loadingTxt.textContent = "Loading...";
     const response = await fetch(NEWS_API);
     const data = await response.json();
+    console.log(data);
     const articles = data.articles.slice(0, 10);
     if (articles) {
       $loadingTxt.textContent = "";

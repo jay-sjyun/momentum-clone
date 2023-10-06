@@ -337,12 +337,15 @@ body {
   line-height: 1.5;
 }
 .modal .news-source {
+  overflow: hidden;
   flex-shrink: 0;
   width: 5rem;
   font-size: 1.2rem;
   line-height: 1.5;
   font-weight: 300;
   color: #ddd;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 /*==============================================

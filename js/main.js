@@ -93,7 +93,7 @@ const newsApp = () => {
 
   // const NEWS_API = `https://newsapi.org/v2/top-headlines?country=kr&apiKey=956d67a3a5fe45a2b60bb2f789870a46`;
 
-  const NEWS_API = "https://api.currentsapi.services/v1/latest-news?" + "language=us&" + "c8MTKqAAmJQ87nIz_YJB--RQAI7iqLuGrmyzgyaWMHSm-ceX";
+  const NEWS_API = "https://api.currentsapi.services/v1/latest-news?" + "language=us&" + "apiKey=c8MTKqAAmJQ87nIz_YJB--RQAI7iqLuGrmyzgyaWMHSm-ceX";
 
   const paintArticle = (data) => {
     const $li = document.createElement("li");
